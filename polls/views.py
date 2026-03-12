@@ -1,9 +1,10 @@
 from django.db.models import F
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from .models import Choice, Question
 
@@ -62,4 +63,12 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        # return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        return HttpResponse()
+
+@csrf_exempt
+def test(request):
+    if request.method =='POST':
+        return HttpResponse(str(request.body))
+    else:
+        return HttpResponse("No POST")
