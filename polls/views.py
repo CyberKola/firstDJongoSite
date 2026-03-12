@@ -1,12 +1,18 @@
+import logging
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db.models import F
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotAllowed
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 from .models import Choice, Question
+
+logger = logging.getLogger(__name__)
 
 
 class IndexView(generic.ListView):
@@ -44,10 +50,18 @@ def vote(request, question_id):
 
 
 def vote(request, question_id):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
+        logger.warning(
+            "Vote request missing or invalid choice; question=%s remote_addr=%s",
+            question_id,
+            request.META.get("REMOTE_ADDR"),
+        )
         # Redisplay the question voting form.
         return render(
             request,
@@ -60,15 +74,70 @@ def vote(request, question_id):
     else:
         selected_choice.votes = F("votes") + 1
         selected_choice.save()
+        logger.info(
+            "Vote recorded: question=%s choice=%s user=%s remote_addr=%s",
+            question_id,
+            selected_choice.id,
+            request.user if request.user.is_authenticated else "anon",
+            request.META.get("REMOTE_ADDR"),
+        )
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        # return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
-        return HttpResponse()
+        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            logger.info(
+                "Login success: user=%s remote_addr=%s",
+                user.username,
+                request.META.get("REMOTE_ADDR"),
+            )
+            return redirect("polls:index")
+
+        logger.warning(
+            "Login failed: username=%s remote_addr=%s",
+            username,
+            request.META.get("REMOTE_ADDR"),
+        )
+        return render(
+            request,
+            "polls/login.html",
+            {"error_message": "Invalid username or password."},
+        )
+
+    return render(request, "polls/login.html")
+
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logger.info(
+            "Logout: user=%s remote_addr=%s",
+            request.user.username,
+            request.META.get("REMOTE_ADDR"),
+        )
+        logout(request)
+
+    return redirect("polls:index")
+
 
 @csrf_exempt
 def test(request):
-    if request.method =='POST':
-        return HttpResponse(str(request.body))
+    if request.method == "POST":
+        body = request.body.decode("utf-8", errors="replace")
+        logger.info(
+            "POST /polls/test/ received from %s: %s",
+            request.META.get("REMOTE_ADDR"),
+            body,
+        )
+        return HttpResponse("Logged POST")
+
     else:
         return HttpResponse("No POST")
