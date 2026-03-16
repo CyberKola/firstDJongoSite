@@ -128,16 +128,16 @@ def logout_view(request):
     return redirect("polls:index")
 
 
-@csrf_exempt
-def test(request):
-    if request.method == "POST":
-        body = request.body.decode("utf-8", errors="replace")
-        logger.info(
-            "POST /polls/test/ received from %s: %s",
-            request.META.get("REMOTE_ADDR"),
-            body,
-        )
-        return HttpResponse("Logged POST")
+# @csrf_exempt
+# def test(request):
+#     if request.method == "POST":
+#         body = request.body.decode("utf-8", errors="replace")
+#         logger.info(
+#             "POST /polls/test/ received from %s: %s",
+#             request.META.get("REMOTE_ADDR"),
+#             body,
+#         )
+#         return HttpResponse("Logged POST")
 
-    else:
-        return HttpResponse("No POST")
+#     else:
+#         return HttpResponse("No POST")
