@@ -2,6 +2,7 @@ import logging
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import F
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
@@ -114,6 +115,24 @@ def login_view(request):
         )
 
     return render(request, "polls/login.html")
+
+
+def register_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            logger.info(
+                "Registration success: user=%s remote_addr=%s",
+                user.username,
+                request.META.get("REMOTE_ADDR"),
+            )
+            return redirect("polls:index")
+    else:
+        form = UserCreationForm()
+
+    return render(request, "polls/register.html", {"form": form})
 
 
 def logout_view(request):
