@@ -1,11 +1,24 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Главная — Team Fortress 2{% endblock %}
 
 {% block content %}
-    <div class="features">
-        <h1>Главная страница</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum ipsa suscipit quae maxime veniam minus, minima esse a alias mollitia est incidunt eos doloribus, atque in asperiores distinctio, excepturi quia.</p>
-        <button class="'btn btn-warning">На страницу про нас</button>
+<section class="tf2-hero">
+    <div class="tf2-hero__inner">
+        <h2>Добро пожаловать в ангар!</h2>
+        <p>Выбери класс, собери команду и выиграй битву за контроль над точками.</p>
+        <div class="tf2-callouts">
+            <article class="tf2-card tf2-card--red">
+                <h3>Красная команда</h3>
+                <p>У нас огонь, сталь и железобетонный дух. Защищай базу и не давай синему захватить точку.</p>
+                <a class="tf2-button" href="{% url 'about' %}">Узнать больше</a>
+            </article>
+            <article class="tf2-card tf2-card--blue">
+                <h3>Синяя команда</h3>
+                <p>Быстрая и хитрая. Захватывай точку и ставь своих врагов в тупик.</p>
+                <a class="tf2-button" href="{% url 'recipes' %}">Вызов принят</a>
+            </article>
+        </div>
     </div>
+</section>
 {% endblock %}

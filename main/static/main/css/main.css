@@ -1,61 +1,302 @@
+/* Team Fortress 2 UI theme */
+:root {
+  --red: #e03e2f;
+  --blue: #2b90d9;
+  --dark: #07090d;
+  --panel: rgba(0, 0, 0, 0.4);
+  --glow: rgba(255, 255, 255, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-    background:rgb(160, 41, 41);
+  height: 100%;
 }
 
-aside {
-    float: left;
-    background-color: rgb(112, 3, 3);
-    width: 20%;
-    padding: 2.5%;
-    height: 100vh;
-    color: #fff;
-    border-right: 5px solid #ff3838;
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-aside img {
-    width: 300px;
-    float: left;
-    position: relative;
-    left: -50px;
-    top: -25px;
+body {
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  color: #f1f1f1;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 55%),
+    linear-gradient(135deg, #2b0d0d 0%, #0a0a0f 45%, #081a2a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
-aside .logo {
-    font-size: 40px;
-    margin-left: 10px;
-    font-weight: bold;
-    position: relative;
-    left: -10px;
-
+.tf2-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(90deg, var(--red) 0%, #190504 40%, #0b1722 60%, var(--blue) 100%);
+  border-bottom: 4px solid #000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-aside h3 {
-    margin-top: 25px;
-    font-size: 25px;
-    font-weight: bold;
+.tf2-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-aside ul {list-style: none}
-aside li {
-    color:rgb(255, 120, 120);
-    display: block;
-    margin-top: 20px;
-    transition: transform .6s ease
+.tf2-logo {
+  width: 64px;
+  height: auto;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6);
 }
 
-aside ul li:hover, aside ul a:hover {
-    color: red;
-    text-decoration: none;
-    transform: scale(1.2);
+.tf2-title h1 {
+  margin: 0;
+  font-family: 'Bungee', cursive;
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 0 16px rgba(0, 0, 0, 0.6);
 }
 
-main .features {
-    float: left;
-    color: #fff;
-    margin-top: 100px;
-    text-align: center;
-    width: 75%;
+.tf2-title p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
 }
 
-main .features h1 {font-size: 50px;}
-main .features p {max-width: 400px; margin: 20px auto}
+.tf2-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tf2-nav li {
+  list-style: none;
+}
+
+.tf2-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  color: #f1f1f1;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tf2-nav a:hover,
+.tf2-nav a:focus {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
+}
+
+.tf2-main {
+  padding: 4rem 2rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tf2-content {
+  min-height: calc(100vh - 220px);
+}
+
+.tf2-hero {
+  padding: 4rem 0;
+  background: radial-gradient(circle at top center, rgba(255, 255, 255, 0.08), transparent 55%);
+  border-radius: 20px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+}
+
+.tf2-hero__inner {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tf2-hero h2 {
+  font-family: 'Bungee', cursive;
+  font-size: 3.2rem;
+  margin: 0 0 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.3), 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.tf2-hero p {
+  font-size: 1.25rem;
+  max-width: 760px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.tf2-callouts {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: stretch;
+}
+
+.tf2-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.6rem;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, border 0.2s ease;
+  min-height: 270px;
+}
+
+.tf2-card--red {
+  border-color: rgba(224, 62, 47, 0.7);
+}
+
+.tf2-card--blue {
+  border-color: rgba(43, 144, 217, 0.7);
+}
+
+.tf2-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.tf2-card h3 {
+  margin: 0 0 0.75rem;
+  font-family: 'Bungee', cursive;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.tf2-card p {
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+.tf2-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--red), var(--blue));
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tf2-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.65);
+}
+
+.tf2-about {
+  padding: 2.5rem 1.5rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.5);
+}
+
+.tf2-about h2 {
+  font-family: 'Bungee', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.tf2-about p {
+  line-height: 1.6;
+  max-width: 800px;
+  margin-bottom: 2rem;
+  opacity: 0.92;
+}
+
+.tf2-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.tf2-stat {
+  flex: 1 1 140px;
+  padding: 1.2rem 1rem;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.4);
+}
+
+.tf2-stat span:first-child {
+  display: block;
+  font-family: 'Bungee', cursive;
+  font-size: 2.7rem;
+  letter-spacing: 0.1em;
+  color: var(--red);
+}
+
+.tf2-stat span:last-child {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.tf2-footer {
+  padding: 1.2rem 2rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.35);
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 720px) {
+  .tf2-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tf2-nav ul {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tf2-hero h2 {
+    font-size: 2.4rem;
+  }
+}
