@@ -13,24 +13,24 @@
  
   <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <h2 class="text  text-center"> GeeksforGeeks </h2>
+    <h2 class="text  text-center"> ОКНУТЫЕ РЕЦЕПТЫ </h2>
      
-    <h3>Update Recipe</h3>
+    <h3>Обновить рецепт</h3>
     <hr>
     <div class="form-group">
-      <label for="exampleInputEmail1">Recipe name</label>
+      <label for="exampleInputEmail1">Название блюда</label>
       <input name="recipe_name" value="{{recipe.recipe_name}}" type="text" class="form-control" required>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Recipe description</label>
+      <label for="exampleInputPassword1">Описание рецепта</label>
       <textarea name="recipe_description" class="form-control" required>{{recipe.recipe_description}}</textarea>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Recipe Image</label>
+      <label for="exampleInputPassword1">Фотографие блюда</label>
       <input name="recipe_image" type="file" class="form-control">
     </div>
  
-    <button type="submit" class="btn btn-success">Update Recipe</button>
+    <button type="submit" class="btn btn-success">Обновить рецепт</button>
   </form>
  
  

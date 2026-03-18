@@ -13,24 +13,24 @@
     
     <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2 class="text  text-center"> GeeksforGeeks </h2>
+        <h2 class="text  text-center"> ОКНУТЫЕ РЕЦЕПТЫ </h2>
         <br>
-        <h3>Add Recipe</h3>
+        <h3>Добавить блюдо</h3>
         <hr>
         <div class="form-group">
-          <label for="exampleInputEmail1">Recipe name</label>
+          <label for="exampleInputEmail1">Название блюда</label>
           <input name="recipe_name" type="text" class="form-control"  required>
          </div>
         <div class="form-group">
-          <label for="exampleInputPassword1"  >Recipe description</label>
+          <label for="exampleInputPassword1"  >Описание рецепта</label>
           <textarea name="recipe_description" class="form-control" required ></textarea>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Recipe Image</label>
+            <label for="exampleInputPassword1">Картинка рецепта</label>
             <input name="recipe_image" type="file" class="form-control" >
           </div>
        
-        <button type="submit" class="btn btn-success">Add Recipe</button>
+        <button type="submit" class="btn btn-success">Добавить</button>
       </form>
  
       <hr>
@@ -39,10 +39,10 @@
  
           <div class="max-auto col-6">
             <div class="form-group">
-              <label for="exampleInputEmail1">Search Food</label>
+              <label for="exampleInputEmail1">Пойск жрачки</label>
               <input name="search" type="text" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary "> Search</button>
+            <button type="submit" class="btn btn-primary "> Искать</button>
           </form>
         </div>
       </div>
@@ -51,10 +51,10 @@
  
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Recipe name</th>
-            <th scope="col">Recipe Desc</th>
-            <th scope="col">Image</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Картина</th>
+            <th scope="col">Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -66,8 +66,8 @@
             <td>
                 <img src="/media/{{recipe.recipe_image}}" style="height: 100px;"> </td>
                 <td>
-                    <a href="/delete_recipe/{{recipe.id }}" class="btn btn-danger m-2">Delete</a>
-                    <a href="/update_recipe/{{recipe.id }}" class="btn btn-success">Update</a>
+                    <a href="/recipe/delete_recipe/{{recipe.id }}" class="btn btn-danger m-2">Удалить</a>
+                    <a href="/recipe/update_recipe/{{recipe.id }}" class="btn btn-success">Обновить</a>
                 </td>
           </tr>
           {% endfor %}
