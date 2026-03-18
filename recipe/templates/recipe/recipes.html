@@ -66,8 +66,8 @@
             <td>
                 <img src="/media/{{recipe.recipe_image}}" style="height: 100px;"> </td>
                 <td>
-                    <a href="/recipe/delete_recipe/{{recipe.id }}" class="btn btn-danger m-2">Удалить</a>
-                    <a href="/recipe/update_recipe/{{recipe.id }}" class="btn btn-success">Обновить</a>
+                    <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger m-2">Удалить</a>
+                    <a href="{% url 'update_recipe' recipe.id %}" class="btn btn-success">Обновить</a>
                 </td>
           </tr>
           {% endfor %}

@@ -13,7 +13,7 @@ def recipes(request):
             recipe_name=recipe_name,
             recipe_description=recipe_description,
         )
-        return redirect('/')
+        return redirect('recipes')
 
     queryset = Recipe.objects.all()
     if request.GET.get('search'):
@@ -26,7 +26,7 @@ def recipes(request):
 def delete_recipe(request, id):
     recipe = get_object_or_404(Recipe, id=id)
     recipe.delete()
-    return redirect('/')
+    return redirect('recipes')
 
 
 def update_recipe(request, id):
@@ -42,7 +42,7 @@ def update_recipe(request, id):
         if recipe_image:
             recipe.recipe_image = recipe_image
         recipe.save()
-        return redirect('/')
+        return redirect('recipes')
 
     context = {'recipe': recipe}
     return render(request, 'recipe/update_recipe.html', context)
